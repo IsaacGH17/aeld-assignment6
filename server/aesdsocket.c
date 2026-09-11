@@ -69,7 +69,10 @@ void *timer_append(void *arg){
             perror("Couldn't open file to write timestamp");
         }
         else{
-            write(fd, formatted_time, strlen(formatted_time));
+            ssize_t written = write(fd, formatted_time, strlen(formatted_time));
+            if (written < 0){
+                perror("Couldn't write timestamp to file");
+            }
         }
         slept = 0;
         pthread_mutex_unlock(file_mtx);
