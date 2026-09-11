@@ -4,7 +4,7 @@ default: all
 all: aesdsocket
 
 aesdsocket: aesdsocket.o
-	$(CC) -Wall -Werror -g -o $@ $^
+	$(CC) -Wall -Werror -g $(LDFLAGS) -o $@ $^
 
 aesdsocket.o: aesdsocket.c aesdsocket.h
 	$(CC) -Wall -Werror -c -o $@ aesdsocket.c
