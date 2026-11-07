@@ -18,12 +18,13 @@ S = "${WORKDIR}/git/server"
 
 # TODO: Add the aesdsocket application and any other files you need to install
 # See https://git.yoctoproject.org/poky/plain/meta/conf/bitbake.conf?h=kirkstone
-# The custom do_configure below overrides the autotools class, so we must
-# explicitly depend on the cross toolchain so the target sysroot exists.
-DEPENDS = "virtual/${TARGET_PREFIX}gcc"
+# Nota: NO declaramos virtual/${TARGET_PREFIX}gcc en DEPENDS — en wrynose
+# ese virtual ya no existe como provider nombrado y bitbake falla con
+# "Nothing PROVIDES 'virtual/aarch64-poky-linux-gcc'". La clase base
+# ya agrega la dependencia del toolchain cross implicitamente.
 
 FILES:${PN} += "${bindir}/aesdsocket"
-DEPENDS += "update-rc.d-native"
+# update-rc.d-native la hereda la clase update-rc.d; no hace falta declararla
 inherit update-rc.d
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME:${PN} = "aesdsocket-start-stop"
