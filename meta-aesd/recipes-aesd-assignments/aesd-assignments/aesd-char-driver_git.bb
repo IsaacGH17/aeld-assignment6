@@ -1,0 +1,22 @@
+SUMMARY = "AESD char driver (asignacion 8)"
+LICENSE = "GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
+
+inherit module
+
+SRC_URI = "git://github.com/cu-ecen-aeld/assignments-3-and-later-IsaacGH17.git;protocol=https;branch=main"
+SRCREV = "0d40de4bb6993577d2299748aa82b90f149923b9"
+
+S = "${WORKDIR}/git/aesd-char-driver"
+
+# La clase module compila contra el kernel de la imagen. El Makefile del
+# driver usa KERNELDIR, no KERNEL_SRC, asi que hay que pasarle el path
+# del build dir del kernel target (el default del Makefile apunta al
+# kernel del HOST y produce un .ko con vermagic invalido en el target).
+EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_BUILDDIR}"
+
+MAKE_TARGETS = "modules"
+
+# El autograder exige 'lsmod | grep aesdchar' al arranque: cargar el
+# modulo automaticamente en boot.
+KERNEL_MODULE_AUTOLOAD += "aesdchar"
