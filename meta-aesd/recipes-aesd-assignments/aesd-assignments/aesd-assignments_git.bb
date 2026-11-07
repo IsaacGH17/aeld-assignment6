@@ -14,7 +14,7 @@ SRCREV = "ba5c2b97dfc210c324ebe8c865625f66a2de69b3"
 # https://docs.yoctoproject.org/ref-manual/variables.html?highlight=workdir#term-WORKDIR
 # We reference the "server" directory here to build from the "server" directory
 # in your assignments repo
-S = "${UNPACKDIR}/git/server"
+S = "${UNPACKDIR}/server"
 
 # TODO: Add the aesdsocket application and any other files you need to install
 # See https://git.yoctoproject.org/poky/plain/meta/conf/bitbake.conf?h=kirkstone
