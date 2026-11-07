@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 inherit module
 
 SRC_URI = "git://github.com/cu-ecen-aeld/assignments-3-and-later-IsaacGH17.git;protocol=https;branch=main"
-SRCREV = "0d40de4bb6993577d2299748aa82b90f149923b9"
+SRCREV = "ba5c2b97dfc210c324ebe8c865625f66a2de69b3"
 
 S = "${WORKDIR}/git/aesd-char-driver"
 
