@@ -39,7 +39,12 @@ do_configure () {
 }
 
 do_compile () {
-    oe_runmake 'CROSS_COMPILE=${TARGET_PREFIX}' 'CC=${CC}' 'CFLAGS=${CFLAGS}' 'LD=${LD}' 'LDFLAGS=${LDFLAGS}'
+	# El Makefile del server ignora LDFLAGS en la linea de link, y sin
+	# -Wl,--hash-style=gnu (que viene en los LDFLAGS de Yocto) el binario
+	# no tiene GNU_HASH -> do_package_qa falla con [ldflags].
+	# Compilamos el objeto con oe_runmake y enlazamos explicitamente.
+	oe_runmake 'CROSS_COMPILE=${TARGET_PREFIX}' 'CC=${CC}' 'CFLAGS=${CFLAGS}' aesdsocket.o
+	${CC} ${LDFLAGS} -g -o ${S}/aesdsocket ${S}/aesdsocket.o
 }
 
 do_install () {
