@@ -20,3 +20,14 @@ MAKE_TARGETS = "modules"
 # El autograder exige 'lsmod | grep aesdchar' al arranque: cargar el
 # modulo automaticamente en boot.
 KERNEL_MODULE_AUTOLOAD += "aesdchar"
+
+# La clase module corre 'make modules_install' en do_install, pero el
+# Makefile del driver solo define el target 'modules' (no modules_install),
+# asi que oe_runmake falla con "No rule to make target 'modules_install'".
+# Instalamos el .ko a mano en el arbol que kernel-module-split escanea
+# (${nonarch_base_libdir}/modules/${KERNEL_VERSION}) para que genere el
+# paquete del modulo y el .conf de autoload.
+do_install () {
+	install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra
+	install -m 0644 ${S}/aesdchar.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/aesdchar.ko
+}
