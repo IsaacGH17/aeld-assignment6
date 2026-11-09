@@ -7,7 +7,7 @@ inherit module
 SRC_URI = "git://github.com/cu-ecen-aeld/assignments-3-and-later-IsaacGH17.git;protocol=https;branch=main"
 SRCREV = "ba5c2b97dfc210c324ebe8c865625f66a2de69b3"
 
-S = "${UNPACKDIR}/aesd-char-driver"
+S = "${UNPACKDIR}/${BP}/aesd-char-driver"
 
 # La clase module compila contra el kernel de la imagen. El Makefile del
 # driver usa KERNELDIR, no KERNEL_SRC, asi que hay que pasarle el path
