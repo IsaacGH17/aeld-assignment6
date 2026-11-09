@@ -1,0 +1,16 @@
+Upstream-Status: Inappropriate [assignment-specific: ldd3 practice modules vs Yocto kernel 6.18]
+--- a/Makefile
++++ b/Makefile
+@@ -29,8 +29,10 @@
+ 
+ else
+     # called from kernel build system: just declare what our modules are
+-    obj-m := hello.o hellop.o seq.o jiq.o sleepy.o complete.o \
+-             silly.o faulty.o kdatasize.o kdataalign.o jit.o
++    # Yocto: solo hello y faulty los exige el autograder
++    # (validate_assignment7_qemu); jit/jiq usan APIs de timer eliminadas
++    # en el kernel 6.18 y seq deprecado. scull se compila en su receta.
++    obj-m := hello.o faulty.o
+ endif
+ 
+ 

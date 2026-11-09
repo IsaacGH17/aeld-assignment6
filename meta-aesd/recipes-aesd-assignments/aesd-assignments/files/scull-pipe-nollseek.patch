@@ -1,0 +1,13 @@
+Upstream-Status: Inappropriate [assignment-specific: ldd3 practice modules vs Yocto kernel 6.18]
+--- a/pipe.c
++++ b/pipe.c
+@@ -311,7 +311,8 @@
+  */
+ struct file_operations scull_pipe_fops = {
+ 	.owner =	THIS_MODULE,
+-	.llseek =	no_llseek,
++	/* no_llseek fue eliminado del kernel (6.12+): el default de
++	 * f_op->llseek == NULL da -ESPIPE via FMODE_LSEEK en vfs_llseek. */
+ 	.read =		scull_p_read,
+ 	.write =	scull_p_write,
+ 	.poll =		scull_p_poll,

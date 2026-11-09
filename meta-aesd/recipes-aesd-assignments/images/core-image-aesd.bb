@@ -1,5 +1,9 @@
 inherit core-image
 CORE_IMAGE_EXTRA_INSTALL += "openssh aesd-assignments aesd-char-driver kernel-module-aesdchar"
+# Modulos ldd3 del assignment 7: el autograder validate_assignment7_qemu
+# exige hello/faulty/scull cargados al boot (los paquetes kernel-module-*
+# llevan el .ko + el conf de /etc/modules-load.d).
+CORE_IMAGE_EXTRA_INSTALL += "aesd-misc-modules aesd-scull kernel-module-hello kernel-module-faulty kernel-module-scull"
 inherit extrausers
 # See https://docs.yoctoproject.org/singleindex.html#extrausers-bbclass
 # We set a default password of root to match our busybox instance setup
